@@ -1,0 +1,47 @@
+<h1 mat-dialog-title>Modify product</h1>
+<div mat-dialog-content>
+
+  <mat-form-field appearance="fill">
+    <mat-label>id</mat-label>
+    <input matInput   [(ngModel)]="product.id">
+  </mat-form-field>
+  <mat-form-field appearance="fill">
+    <mat-label>label</mat-label>
+    <input matInput   [(ngModel)]="product.label">
+  </mat-form-field>
+  <mat-form-field appearance="fill">
+    <mat-label>price</mat-label>
+    <input matInput  type="number"  [(ngModel)]="product.price">
+  </mat-form-field>
+  <mat-form-field appearance="fill">
+    <mat-label>photo</mat-label>
+    <input matInput   [(ngModel)]="product.photo">
+  </mat-form-field>
+  <mat-form-field appearance="fill">
+    <mat-label>Creation Date</mat-label>
+    <input matInput  type="date"  [(ngModel)]="product.creationDate">
+  </mat-form-field>
+  <!--  list size-->
+  <ul>
+    <li *ngFor="let size of product.size; let i = index">{{size.type}} <button mat-button (click)="remove(i)">remove</button></li>
+  </ul>
+  <!--  --------------------->
+  <mat-card>
+    <mat-card-content style="display: flex; ">
+      <mat-form-field appearance="standard">
+        <mat-label>size</mat-label>
+        <input matInput type="number"   [(ngModel)]="size.type">
+      </mat-form-field>
+      <mat-form-field appearance="standard">
+        <mat-label>Quatite</mat-label>
+        <input matInput type="number"  [(ngModel)]="size.qte">
+      </mat-form-field>
+      <button mat-flat-button (click)="addSize()">add</button>
+    </mat-card-content>
+  </mat-card>
+ 
+</div>
+<div mat-dialog-actions>
+  <button mat-button >No Thanks</button>
+  <button mat-button (click)="modify()">Ok</button>
+</div>

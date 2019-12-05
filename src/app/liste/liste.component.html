@@ -1,0 +1,52 @@
+<mat-card style=" margin:50px; min-height: 80%; background: #eeeeee ">
+  <mat-card-header style="width: 100%; display: flex; justify-content: space-between">
+    <mat-card-title>Product List</mat-card-title>
+    <button mat-fab color="primary" (click)="openDialog()"><mat-icon>add</mat-icon></button>
+  </mat-card-header>
+  <div class="container-fluid">
+    <div style="width: 100%">
+
+      <mat-form-field style="width: 100%" appearance="fill">
+        <mat-label>Search by label</mat-label>
+        <input matInput   [(ngModel)]="search">
+      </mat-form-field>
+    </div>
+    <div class="row">
+      <div  *ngFor="let product of products" style="padding: 15px">
+
+          <mat-card style="width: 200px" [mat-menu-trigger-for]="menu"  *ngIf="product.label.indexOf(search) != -1||product.id.toString().indexOf(search)!=-1">
+            <mat-card-title>{{product.label}}</mat-card-title>
+            <mat-card-content>
+              <img src="{{product.photo}}" height="100"  >
+              <div><span class="badge badge-secondary">{{product.price}} DT</span></div>
+           
+
+              <div class="d-flex">
+              <div *ngFor="let size of product.size">
+                <table class="table" >
+                
+                    <tr style="width: 50px; height: 10px;">
+                      <th scope="col">{{size.type}}</th>
+                      {{size.qte}}
+                    </tr>
+                  
+                  
+                </table>
+              </div>
+           
+            </div>
+              <mat-menu #menu="matMenu">
+                <button mat-menu-item (click)="openDialogModif(product.id)">Modify</button>
+                <button mat-menu-item (click)="delete(product.id)">Delete</button>
+              </mat-menu>
+            </mat-card-content>
+          </mat-card>
+
+      </div>
+
+
+    </div>
+  </div>
+</mat-card>
+
+

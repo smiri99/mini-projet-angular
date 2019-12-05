@@ -1,0 +1,58 @@
+<form [formGroup]="ProductForm">
+<h1 mat-dialog-title>Add product</h1>
+
+<div mat-dialog-content>
+   
+  <mat-form-field appearance="fill">
+    <mat-label>id</mat-label>
+    <input matInput     [formControl]="id" formControlName="id" >
+  </mat-form-field>
+  <div *ngIf="idProduct.invalid && idProduct.dirty" class="alert alert-danger">Id must be a number</div>
+  <div class="alert alert-danger" *ngIf="check(this.ProductForm.value['id'])">is already exists</div>
+  <mat-form-field appearance="fill">
+    <mat-label>label</mat-label>
+    <input matInput     [formControl]="label" formControlName="label">
+  </mat-form-field>
+  <div *ngIf="labelProduct.invalid && labelProduct.dirty" class="alert alert-danger">Start widh Uppercase</div>
+  <mat-form-field appearance="fill">
+    <mat-label>price</mat-label>
+    <input matInput  type="number"    [formControl]="price" formControlName="price">
+  </mat-form-field>
+  <div *ngIf="priceProduct.invalid && priceProduct.dirty" class="alert alert-danger">Price must be a number</div>
+  <mat-form-field appearance="fill">
+    <mat-label>photo</mat-label>
+    <input matInput    value="../../assets/" [formControl]="photo" formControlName="photo">
+  </mat-form-field>
+  <div *ngIf="photoProduct.invalid && photoProduct.dirty" class="alert alert-danger">Put the URL </div>
+  <mat-form-field appearance="fill">
+    <mat-label>Creation Date</mat-label>
+    <input matInput  type="date"  [formControl]="creationDate" formControlName="creationDate">
+  </mat-form-field>
+  <div *ngIf="creationDateProduct.invalid" class="alert alert-danger">Put it</div>
+<!--  list size-->
+  <ul>
+    <li *ngFor="let size of product.size">{{size.type}}</li>
+  </ul>
+<!--  --------------------->
+  <mat-card>
+    <mat-card-content style="display: flex; ">
+      <mat-form-field appearance="standard">
+        <mat-label>size</mat-label>
+        <input matInput type="number"   [formControl]="type" formControlName="type">
+      </mat-form-field>
+      <div *ngIf="typeProduct.invalid && typeProduct.dirty" class="alert alert-danger">Type must be a number</div>
+      <mat-form-field appearance="standard">
+      <mat-label>qte</mat-label>
+      <input matInput type="number"    [formControl]="qte" formControlName="qte">
+    </mat-form-field>
+    <div *ngIf="qteProduct.invalid && qteProduct.dirty" class="alert alert-danger">Quantite must be a number</div>
+      <button mat-flat-button (click)="addSize()">add</button>
+    </mat-card-content>
+  </mat-card>
+ 
+</div>
+<div mat-dialog-actions>
+  <button mat-button >No Thanks</button>
+  <button mat-button (click)="add()" [disabled]="check(this.ProductForm.value['id'])">Ok</button>
+</div>
+</form>
